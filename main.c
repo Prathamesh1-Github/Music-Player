@@ -72,7 +72,7 @@ struct node *insertNodeSong(struct node *root, char songName[], char artistName[
     return root;
 }
 
-struct node *search(struct node *root, char artistName[])
+struct node *searchArtist(struct node *root, char artistName[])
 {
     if (root == NULL)
     {
@@ -85,11 +85,11 @@ struct node *search(struct node *root, char artistName[])
     }
     else if (result < 0)
     {
-        return search(root->left, artistName);
+        return searchArtist(root->left, artistName);
     }
     else
     {
-        return search(root->right, artistName);
+        return searchArtist(root->right, artistName);
     }
 }
 
@@ -106,11 +106,11 @@ struct node *searchSong(struct node *root, char songName[])
     }
     else if (result < 0)
     {
-        return search(root->left, songName);
+        return searchSong(root->left, songName);
     }
     else
     {
-        return search(root->right, songName);
+        return searchSong(root->right, songName);
     }
 }
 
