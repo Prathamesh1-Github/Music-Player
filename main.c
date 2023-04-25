@@ -145,6 +145,23 @@ void showArtistSongs(struct node *root, char artistName[])
     }
 }
 
+void showGenreSongs(struct node *root, char genreName[])
+{
+    if (root != NULL)
+    {
+        showGenreSongs(root->left, genreName);
+        int result = strcmp(genreName, root->genreName);
+        if (result == 0)
+        {
+            printf("%s ", root->songName);
+            printf("%s ", root->artistName);
+            printf("%s ", root->genreName);
+            printf("\n");
+        }
+        showGenreSongs(root->right, genreName);
+    }
+}
+
 void playSong(struct node *root, char songName[], char* songPath)
 {
     // char *songPath[1000];
@@ -173,27 +190,21 @@ int main()
 {
     struct node *root;
     root = NULL;
-    // char songName[1000]; char artistName[1000]; char genreName[1000];
-    // printf("Enter the song name:\n");
-    // // scanf("%s", &name);
-    // scanf("%c", (char *) stdin);
-    // fgets(songName,1000,stdin);
-    // printf("Enter the artist name:\n");
-    // // scanf("%s", &name);
-    // scanf("%c", (char *) stdin);
-    // fgets(artistName,1000,stdin);
-    // printf("Enter the genre name:\n");
-    // // scanf("%s", &name);
-    // scanf("%c", (char *) stdin);
-    // fgets(genreName,1000,stdin);
-    root = insertNode(root, "Jeet", "Ritviz", "Electronic", "path");
+
+    root = insertNode(root, "Jeet", "Ritviz", "Electronic", "Jeetpath");
     root = insertNode(root, "Kesariya", "Arijit Singh", "Romantic", "Kesariyapath");
-    root = insertNode(root, "Khali Salam Dua", "Himensh rashamiya", "Romantic", "path");
-    root = insertNode(root, "Tere Liye", "Atif Aslam", "Romantic", "path");
-    root = insertNode(root, "Baaraat", "Ritviz", "Electronic", "path");
-    root = insertNode(root, "Tere Pyar Mein", "Arijit Singh", "Romantic", "path");
+    root = insertNode(root, "Khali Salam Dua", "Himensh rashamiya", "Romantic", "KhaliSalampath");
+    root = insertNode(root, "Tere Liye", "Atif Aslam", "Romantic", "TereLiyepath");
+    root = insertNode(root, "Baaraat", "Ritviz", "Electronic", "Baaratpath");
+    root = insertNode(root, "Tere Pyar Mein", "Arijit Singh", "Romantic", "TerePyarMenepath");
 
     inorder(root);
+
+    printf("\n");
+    printf("\n");
+    printf("\n");
+
+// AGAIN COMMENT IN --------------
 
     char artistName[1000];
     printf("Enter arist name: \n");
@@ -210,6 +221,27 @@ int main()
     printf("%s", songToPlay);
 
     char *songPath;
+    playSong(root, songToPlay, songPath);
+    // char songPath[1000] = playSong(root, songToPlay);
+    // strcpy(songPath, playSong(root, songToPlay));
+    printf("\n Song Path = %s", songPath);
+
+// COMMENT IN -------------------
+
+
+    char genreName[1000];
+    printf("Enter genre name: \n");
+    scanf("%[^\n]%*c", &genreName);
+    printf("%s \n", genreName);
+    printf("\n");
+    showGenreSongs(root, genreName);
+
+    printf("\n");
+    printf("Enter the song to be played: \n");
+    scanf("%[^\n]%*c", &songToPlay);
+
+    printf("%s", songToPlay);
+
     playSong(root, songToPlay, songPath);
     // char songPath[1000] = playSong(root, songToPlay);
     // strcpy(songPath, playSong(root, songToPlay));
